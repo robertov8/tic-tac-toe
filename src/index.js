@@ -94,8 +94,6 @@ class Game extends Component {
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
-
-    console.log(this.state.history);
     
     return (
       <div className='game'>
