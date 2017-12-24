@@ -15,7 +15,7 @@ class Board extends Component {
     return (
       <Square 
         value={this.props.squares[i]} 
-        onClick={(i) => this.props.onClick(i)}
+        onClick={() => this.props.onClick(i)}
       />
     );
   }
@@ -57,7 +57,7 @@ class Game extends Component {
   handleClick(i) {
     const history = this.state.history;
     const current = history[history.length - 1];
-    const squares = current.squares.splice();
+    const squares = current.squares.slice();
 
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -71,8 +71,6 @@ class Game extends Component {
       }]),
       xIsNext: !this.state.xIsNext,
     });
-
-    console.log(this.state);
   }
 
   render() {
@@ -96,6 +94,8 @@ class Game extends Component {
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
+
+    console.log(this.state.history);
     
     return (
       <div className='game'>
@@ -114,6 +114,10 @@ class Game extends Component {
     );
   }
 }
+
+ReactDOM.render(<Game />, document.getElementById('root'));
+
+// ========================================
 
 function calculateWinner(squares) {
   const lines = [
@@ -137,5 +141,3 @@ function calculateWinner(squares) {
 
   return null;
 }
-
-ReactDOM.render(<Game />, document.getElementById('root'));
